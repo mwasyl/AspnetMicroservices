@@ -30,6 +30,13 @@ namespace Ordering.API.Extensions
                 catch (SqlException ex)
                 {
                     logger.LogError(ex, "An error occurred while migrating the database used on context {DbContextName}", typeof(TContext).Name);
+
+                    if (retryForAvailability < 50)
+                    {
+                        retryForAvailability++;
+                        System.Threading.Thread.Sleep(2000);
+                        MigrateDatabase<TContext>(host, seeder, retryForAvailability);
+                    }
                 }
             }
 
