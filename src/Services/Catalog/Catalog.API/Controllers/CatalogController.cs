@@ -5,10 +5,12 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Catalog.API.Controllers
 {
     [ApiController]
+    //[Authorize]
     [Route("api/v1/[controller]")]
     public class CatalogController : ControllerBase
     {
